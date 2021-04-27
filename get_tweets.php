@@ -32,6 +32,19 @@ $user_timeline = $twitter
     ->buildOauth($url, $requestMethod)
     ->performRequest();
 
+//get following users list
+$url_following = 'https://api.twitter.com/1.1/friends/list.json';
+$getfield_following = "?screen_name={$screen_name}";
+$requestMethod_following = 'GET';
+
+
+$folloing_list= $twitter->setGetfield($getfield_following)
+    ->buildOauth($url_following, $requestMethod_following)
+    ->performRequest();
+
+//friend list array
+$folloing_list = json_decode($folloing_list,true);
+ 
 //User tweets array
 $user_timeline = json_decode($user_timeline);
 
@@ -59,3 +72,27 @@ foreach ($user_timeline as $user_tweet) {
     echo "</li>";
 }
 echo "</ul>";
+
+echo "<H1>Following Users</H1>";
+echo "<ul>";
+$jsonarray=array();
+foreach($folloing_list['users'] as $key=>$user){
+    echo "<li>";
+    $sname=$user['screen_name'];
+    $username=$user['name'];
+    echo "<a href='following_posts.php?username={$username}&name={$sname}&username={$username}'>".$user['name'].'</a>';
+    echo "</li>";
+    $jsonarray[$key]['id']=$user['id'];
+    $jsonarray[$key]['name']=$user['name'];
+    $jsonarray[$key]['screen_name']=$user['screen_name'];
+    $jsonarray[$key]['description']=$user['description'];
+    $jsonarray[$key]['url']=$user['url'];
+
+}
+echo "</ul>";
+
+echo "<H1>Default JSON</H1>";
+$Json=json_encode($jsonarray);
+echo "<pre>";
+print_r($Json);
+echo "</pre>";
