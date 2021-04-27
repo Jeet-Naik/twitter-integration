@@ -1,33 +1,6 @@
 <?php
-/*  TWITTER LOGIN BASIC - Tutorial
- *  file            - index.php
- *  Developer       - Krishna Teja G S
- *  Website         - http://packetcode.com/apps/twitter-login/
- *  Date            - 4th Sept 2015
- *  license         - GNU General Public License version 2 or later
- */
-
-/* 
- * CODE BREAKDOWN
- *   PART 1 - DEFINING (loads files,global constants,session enabling)
- *   PART 2 - PROCESS ( check for logout,user session,call back request ) 
- *   PART 3 - FRONT END (display login url or user data)
- *
- */
-
-
-/* 
- * PART 1 - DEFINING 
- */
-// Load the library files
-require_once('twitteroauth/OAuth.php');
-require_once('twitteroauth/twitteroauth.php');
-// define the consumer key and secet and callback
-define('CONSUMER_KEY', 'NcHHQgOlZ5669A4Nx83slaOGU');
-define('CONSUMER_SECRET', 'LjImKoLnUemMhW72hz22ju8L31lukma40lWsBwPhqP8xEB4415');
-define('OAUTH_CALLBACK', 'http://localhost/twitter-login/twitter_callback.php');
-// start the session
-session_start();
+// Load the configuration files
+require_once('config.php');
 
 /* 
  * PART 2 - PROCESS
